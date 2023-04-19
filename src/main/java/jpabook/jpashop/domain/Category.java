@@ -25,10 +25,16 @@ public class Category {
     private List<Item> items = new ArrayList<>();
 
     // TODO: parent 와 child는 잘 이해가 안간다. 기본 원리 듣고 다시 봐보자 !!
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
+
+    // 연관관계 편의 메소드
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParent(this);
+    }
 }
