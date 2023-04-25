@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 누구나 생성자를 만들지 못하도록 막는다.
 public class Order {
 
     @Id @GeneratedValue
@@ -22,10 +25,10 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // 주인이 order 밖에 없을때 cascade 적용 적절.
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 주인이 order 밖에 없을때 cascade 적용 적절.
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
