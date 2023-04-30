@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -40,5 +41,18 @@ public class MemberController {
         memberService.join(member);
 
         return "redirect:/"; // 첫번째 페이지로 리다이렉트
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        // 여기에서는 멤버 entity를 건들이지 않으므로 별도 객체 반환 없이 entity를 바로 넘겼다.
+        /**
+         * 하지만 주의 !!!
+         * API를 만들때엔는 절때 entity를 외부로 반환해서는 안된다.
+         * Entity에 스펙이 추가하면 -> API 스펙이 변경된다!! - 치명적 !!
+         */
+        model.addAttribute("members", members);
+        return "/members/memberList";
     }
 }
