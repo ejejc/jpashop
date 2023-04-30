@@ -63,6 +63,7 @@ public class ItemController {
     @PostMapping("/items/{itemId}/edit")
     public String updateItem(@PathVariable("itemId") Long itemId,
                              @ModelAttribute("form") BookForm form) {
+        // 좋지 않은 설계
         /*Book book = new Book();
         book.setId(form.getId());
         book.setName(form.getName());
