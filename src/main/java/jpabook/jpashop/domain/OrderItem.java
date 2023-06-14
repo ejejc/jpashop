@@ -6,9 +6,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 
+@BatchSize(size = 1000)
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 누구나 생성자를 만들지 못하도록 막는다.
