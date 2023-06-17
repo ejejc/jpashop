@@ -1,6 +1,7 @@
 package jpabook.jpashop.repository.order.query;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 public class OrderItemQueryDto {
